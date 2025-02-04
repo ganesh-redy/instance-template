@@ -10,12 +10,13 @@ pipeline{
             }
             
         }
-        stage ("git connection"){
+        stage ("first"){
          
             steps{
                
                 git branch : "main", url : "https://github.com/ganesh-redy/instance-template.git"
             }
+         
         }
         stage("stage"){
             steps{
