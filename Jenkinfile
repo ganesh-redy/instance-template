@@ -1,0 +1,28 @@
+pipeline{
+    agent any
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS_ = credentials("gcp-id")
+    }
+    stages{
+        stage("first"){
+            steps{
+                 sh " echo terraform start"
+            }
+            
+        }
+        stage ("git connection"){
+            steps{
+                sh "git connection establish"
+                git branch : "main", url : "https://github.com/ganesh-redy/instance-template.git"
+            }
+        }
+        stage("stage"){
+            steps{
+            sh "terraform init"
+           sh "terraform plan"
+           sh "terraform apply -auto-approve"
+            }
+           
+        }
+    }
+}
