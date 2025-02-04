@@ -4,13 +4,7 @@ pipeline{
         GOOGLE_APPLICATION_CREDENTIALS_ = credentials("gcp-id")
     }
     stages{
-        stage("first"){
-            steps{
-                 sh " echo terraform start"
-            }
-            
-        }
-        stage ("first"){
+          stage ("first"){
          
             steps{
                
@@ -18,7 +12,14 @@ pipeline{
             }
          
         }
-        stage("stage"){
+        stage("second"){
+            steps{
+                 sh " echo terraform start"
+            }
+            
+        }
+       
+        stage("start"){
             steps{
             sh "git connection establish"
             sh "terraform init"
