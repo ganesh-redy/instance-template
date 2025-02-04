@@ -11,9 +11,7 @@ pipeline{
             
         }
         stage ("git connection"){
-           steps{
-             sh "git connection establish"
-     }
+         
             steps{
                
                 git branch : "main", url : "https://github.com/ganesh-redy/instance-template.git"
@@ -21,6 +19,7 @@ pipeline{
         }
         stage("stage"){
             steps{
+            sh "git connection establish"
             sh "terraform init"
            sh "terraform plan"
            sh "terraform apply -auto-approve"
