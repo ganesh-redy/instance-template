@@ -1,32 +1,21 @@
-pipeline{
+pipeline {
     agent any
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS_ = credentials("gcp-id")
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-id')
     }
-    stages{
-          stage ("first"){
-         
-            steps{
-               
-                git branch : "main", url : "https://github.com/ganesh-redy/instance-template.git"
+    stages {
+        stage("Connecting to Git") {
+            steps {
+                git branch: "main", url: "https://github.com/ganesh-redy/Jenkin-gcp-instance.git"
             }
-         
         }
-        stage("second"){
-            steps{
-                 sh " echo terraform start"
+
+        stage("Terraform Initialization") {
+            steps {
+                sh "terraform init"
+                sh "terraform plan"
+                sh "terraform apply -auto-approve"
             }
-            
-        }
-       
-        stage("start"){
-            steps{
-            sh "git connection establish"
-            sh "terraform init"
-           sh "terraform plan"
-           sh "terraform apply -auto-approve"
-            }
-           
         }
     }
 }
