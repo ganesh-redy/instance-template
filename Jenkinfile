@@ -11,8 +11,11 @@ pipeline{
             
         }
         stage ("git connection"){
+           steps{
+             sh "git connection establish"
+     }
             steps{
-                sh "git connection establish"
+               
                 git branch : "main", url : "https://github.com/ganesh-redy/instance-template.git"
             }
         }
